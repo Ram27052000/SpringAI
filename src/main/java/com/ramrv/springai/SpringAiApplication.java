@@ -1,13 +1,15 @@
 package com.ramrv.springai;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class SpringAiApplication {
-
 	public static void main(String[] args) {
+
 		SpringApplication.run(SpringAiApplication.class, args);
+        System.out.println(System.getenv("OPENROUTER_API_KEY"));
+        System.out.println(System.getenv("GROQ_API_KEY"));
+        System.out.println(System.getenv("GEMINI_API_KEY"));
 	}
 
 }
