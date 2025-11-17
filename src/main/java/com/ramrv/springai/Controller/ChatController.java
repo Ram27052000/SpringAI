@@ -23,6 +23,8 @@ public class ChatController {
     public record ChatResponse(String message) {
     }
 
+    public record PresentationRequest(String topic, int count){}
+
     @PostMapping("/chat")
     public ChatResponse chat(@RequestBody ChatRequest chatRequest) {
         String response = chatClient.prompt().user(chatRequest.message()).call().content();
@@ -33,6 +35,15 @@ public class ChatController {
     public ChatResponse funnyAI(@RequestBody ChatRequest chatRequest) {
         String response = chatClient.prompt().
                 system("Your are funny and sarcastic").user(chatRequest.message()).call().content();
+        return new ChatResponse(response);
+    }
+
+    @PostMapping("/presentation")
+    public ChatResponse presentation(@RequestBody PresentationRequest presentationRequest) {
+        String prompt =
+                "I want to give a presentation about " + presentationRequest.topic() + ". " +
+                        "Give me " + presentationRequest.count() + " title suggestions.";
+        String response = chatClient.prompt().user(prompt).call().content();
         return new ChatResponse(response);
     }
 }
