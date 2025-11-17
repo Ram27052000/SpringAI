@@ -28,4 +28,11 @@ public class ChatController {
         String response = chatClient.prompt().user(chatRequest.message()).call().content();
         return new ChatResponse(response);
     }
+
+    @PostMapping("/funny")
+    public ChatResponse funnyAI(@RequestBody ChatRequest chatRequest) {
+        String response = chatClient.prompt().
+                system("Your are funny and sarcastic").user(chatRequest.message()).call().content();
+        return new ChatResponse(response);
+    }
 }
